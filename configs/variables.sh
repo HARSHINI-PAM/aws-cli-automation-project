@@ -7,7 +7,7 @@ REGION="eu-north-1"
 INSTANCE_TYPE="t3.micro"
 
 # Key pair
-KEY_NAME="devops-key"
+KEY_NAME="aws-devops-key"
 
 # Security group
 SECURITY_GROUP_ID="sg-0e2a308bcf9c86f10"

@@ -1,30 +1,62 @@
 <powershell>
 
-# Install IIS Web Server
 Install-WindowsFeature -Name Web-Server -IncludeManagementTools
 
-# Path where IIS serves files
-$path = "C:\inetpub\wwwroot\index.html"
+$path="C:\inetpub\wwwroot\index.html"
 
-# Frontend HTML content
-$html = @"
+$html=@"
 <!DOCTYPE html>
 <html>
 <head>
-<title>DevOps Automation</title>
+<title>AWS DevOps Automation</title>
+
+<style>
+body{
+font-family:Arial;
+background:#1e3a8a;
+color:white;
+text-align:center;
+margin-top:120px;
+}
+
+.card{
+background:#1e40af;
+padding:40px;
+border-radius:10px;
+width:500px;
+margin:auto;
+}
+
+button{
+background:#22c55e;
+padding:10px 18px;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+
 </head>
 
-<body style='text-align:center;margin-top:100px;font-family:Arial'>
+<body>
 
-<h1>Frontend running on Windows Server</h1>
+<div class="card">
 
-<p>Automated deployment successful</p>
+<h1>Windows DevOps Server</h1>
 
-<button onclick="test()">Test Deployment</button>
+<p>IIS deployed automatically using AWS CLI automation.</p>
+
+<p>Infrastructure created via GitHub scripts.</p>
+
+<button onclick="health()">Check Status</button>
+
+</div>
 
 <script>
-function test(){
-alert("Deployment Successful!");
+function health(){
+alert("Windows server deployment successful!");
 }
 </script>
 
@@ -32,10 +64,8 @@ alert("Deployment Successful!");
 </html>
 "@
 
-# Create the page
 Set-Content -Path $path -Value $html
 
-# Restart IIS to ensure page loads
 iisreset
 
 </powershell>

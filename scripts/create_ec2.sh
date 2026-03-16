@@ -2,16 +2,44 @@
 
 source ../configs/variables.sh
 
-echo "Creating EC2 instance..."
+echo "Starting EC2 infrastructure creation..."
+
+############################################
+# Create 3 Linux Instances
+############################################
+
+echo "Creating 3 Linux instances..."
 
 aws ec2 run-instances \
---image-id $AMI_ID \
---count 1 \
+--image-id $LINUX_AMI \
+--count 3 \
 --instance-type $INSTANCE_TYPE \
 --key-name $KEY_NAME \
 --security-group-ids $SECURITY_GROUP_ID \
---region $REGION \
 --associate-public-ip-address \
---tag-specifications "ResourceType=instance,Tags=[{Key=Project,Value=$PROJECT_TAG}]"
+--region $REGION \
+--user-data file://setup_nginx.sh \
+--tag-specifications "ResourceType=instance,Tags=[{Key=Project,Value=$PROJECT_TAG},{Key=OS,Value=Linux}]"
 
-echo "EC2 instance creation command executed."
+echo "Linux instances launched."
+
+############################################
+# Create 2 Windows Instances
+############################################
+
+echo "Creating 2 Windows instances..."
+
+aws ec2 run-instances \
+--image-id $WINDOWS_AMI \
+--count 2 \
+--instance-type $INSTANCE_TYPE \
+--key-name $KEY_NAME \
+--security-group-ids $SECURITY_GROUP_ID \
+--associate-public-ip-address \
+--region $REGION \
+--user-data file://setup_windows_iis.ps1 \
+--tag-specifications "ResourceType=instance,Tags=[{Key=Project,Value=$PROJECT_TAG},{Key=OS,Value=Windows}]"
+
+echo "Windows instances launched."
+
+echo "EC2 infrastructure creation completed."

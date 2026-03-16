@@ -1,15 +1,17 @@
 #!/bin/bash
 
-echo "Starting DevOps Infrastructure Deployment..."
+echo "================================="
+echo " AWS DevOps Infrastructure Setup "
+echo "================================="
 
 cd scripts
 
-echo "Creating Linux instances..."
+echo "Creating Linux servers..."
 bash create_linux_instance.sh
 
-echo "Creating Windows instances..."
+echo "Creating Windows servers..."
 bash create_windows_instance.sh
 
-echo "Infrastructure creation complete."
-
-echo "Deployment finished."
+echo "================================="
+echo "Deployment Completed Successfully"
+echo "================================="
